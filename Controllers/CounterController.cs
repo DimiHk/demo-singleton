@@ -8,40 +8,38 @@ namespace demo_singleton.Controllers
     public class CounterController : ControllerBase
     {
         private readonly ICounter _counterService;
-        private readonly ICounter _counterServiceTest;
 
-        public CounterController(ICounter counterService, ICounter counterServiceTest)
+        public CounterController(ICounter counterService)
         {
             _counterService = counterService;
-            _counterServiceTest = counterServiceTest;
         }
 
         [HttpGet]
         [Route("getInstance")]
-        public async Task<CounterService> GetCounterInstance()
+        public CounterService GetCounterInstance()
         { 
-            return await _counterService.GetCounterInstance();
+            return _counterService.GetCounterInstance();
         }
 
         [HttpPost]
         [Route("decrementCounter")]
-        public async Task<int> DecrementCounter()
+        public int DecrementCounter()
         {
-            return await _counterService.DecrementCounter();
+            return _counterService.DecrementCounter();
         }
 
         [HttpPost]
         [Route("incrementCounter")]
-        public async Task<int> IncrementCounter()
+        public int IncrementCounter()
         {
-            return await _counterService.IncrementCounter();
+            return _counterService.IncrementCounter();
         }
 
         [HttpGet]
         [Route("compareInstances")]
-        public async Task<Boolean> CompareInstances()
+        public Boolean CompareInstances([FromServices] ICounter service)
         {
-            return await _counterService.CompareInstances((CounterService) _counterServiceTest);
+            return _counterService.CompareInstances((CounterService) service);
         }
     }
 }

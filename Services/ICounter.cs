@@ -2,12 +2,12 @@
 {
     public interface ICounter
     {
-        Task<CounterService> GetCounterInstance();
+        CounterService GetCounterInstance();
 
-        Task<int> IncrementCounter();
+        int IncrementCounter();
 
-        Task<int> DecrementCounter();
+        int DecrementCounter();
 
-        Task<Boolean> CompareInstances(CounterService service);
+        Boolean CompareInstances(CounterService service);
     }
 }
